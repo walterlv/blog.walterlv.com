@@ -5,4 +5,8 @@
     <RootNamespace>Walterlv.Blog</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Walterlv.Blog.Model\Walterlv.Blog.Model.csproj" />
+  </ItemGroup>
+
 </Project>
