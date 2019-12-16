@@ -2,6 +2,8 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #181A1B;
+    color: #FFFFFF;
 }
 
 a, .btn-link {
@@ -31,8 +33,7 @@ app {
 }
 
     .main .top-row {
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #d6d5d5;
+        background-color: #1570A6;
         justify-content: flex-end;
     }
 
@@ -41,22 +42,52 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background: #1B1C1D;
 }
 
     .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
+        background-color: #1570A6;
+        box-shadow: 0 1px 3px rgba(0,0,0,.25), 0 -1px 0 rgba(0,0,0,.1) inset;
+    }
+
+    .sidebar img.avatar-logo {
+        width: 100%;
+    }
+
+    .sidebar svg {
+        width: 28px;
+        height: 28px;
+        fill: white;
+        margin: 0 14px;
     }
 
     .sidebar .navbar-brand {
         font-size: 1.1rem;
+        font-weight: 800;
     }
+
+    .sidebar .site-info {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+        .sidebar .site-info .site-info-header {
+            font-size: 1.5rem;
+            font-weight: 100;
+        }
+
+        .sidebar .site-info p {
+            line-height: 2rem;
+            margin-top: 0;
+            margin-bottom: 0;
+            color: #99CCEE;
+        }
 
     .sidebar .oi {
         width: 2rem;
@@ -88,12 +119,12 @@ app {
         }
 
             .sidebar .nav-item a.active {
-                background-color: rgba(255,255,255,0.25);
+                background-color: rgba(255,255,255,0.1);
                 color: white;
             }
 
             .sidebar .nav-item a:hover {
-                background-color: rgba(255,255,255,0.1);
+                background-color: #1570A6;
                 color: white;
             }
 
@@ -129,12 +160,12 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
@@ -156,7 +187,7 @@ app {
     }
 
     .sidebar {
-        width: 250px;
+        width: 280px;
         height: 100vh;
         position: sticky;
         top: 0;
