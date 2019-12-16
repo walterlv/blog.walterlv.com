@@ -1,6 +1,6 @@
 using System;
 
-namespace Walterlv.Blog.Data
+namespace Walterlv.Blog
 {
     public class WeatherForecast
     {
