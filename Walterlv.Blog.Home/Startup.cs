@@ -28,7 +28,7 @@ namespace Walterlv.Blog
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
