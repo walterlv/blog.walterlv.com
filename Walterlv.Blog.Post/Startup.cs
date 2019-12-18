@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Walterlv.Blog.Services;
 
 namespace Walterlv.Blog
 {
@@ -26,6 +27,7 @@ namespace Walterlv.Blog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton<PostGenerator>(new PostGenerator());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

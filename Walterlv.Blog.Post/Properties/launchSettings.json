@@ -20,7 +20,7 @@
     "Walterlv.Blog.Post": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "blog/page2",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

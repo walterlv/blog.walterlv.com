@@ -54,8 +54,8 @@ namespace Walterlv.Blog.Controllers
         }
 
 
-        [HttpGet]
-        public IEnumerable<PostBrief> GetImageToCsdn(string pageId)
+        [HttpGet("page{pageIndex}")]
+        public IEnumerable<PostBrief> Get(int pageIndex)
         {
             return SamplePostBriefList;
         }
