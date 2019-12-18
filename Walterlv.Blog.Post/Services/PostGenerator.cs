@@ -1,20 +1,26 @@
-﻿using Markdig;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
+using Walterlv.Blog.Data;
 
 namespace Walterlv.Blog.Services
 {
     public class PostGenerator
     {
-        private readonly Lazy<Dictionary<string, FileInfo>> _fileCache = new Lazy<Dictionary<string, FileInfo>>(GenerateFileCache, LazyThreadSafetyMode.PublicationOnly);
+        private Lazy<Dictionary<string, FileInfo>> _fileCache = new Lazy<Dictionary<string, FileInfo>>(GenerateFileCache, LazyThreadSafetyMode.PublicationOnly);
+        private ConcurrentDictionary<string, Post?> _postCache = new ConcurrentDictionary<string, Post?>();
 
-        private readonly ConcurrentDictionary<string, Post?> _postCache = new ConcurrentDictionary<string, Post?>();
+        public PostGenerator()
+        {
+            StartMonitorPosts();
+        }
 
         public Post? Get(string id)
         {
@@ -27,9 +33,9 @@ namespace Walterlv.Blog.Services
             return value;
         }
 
-        public IReadOnlyList<Post> GetAll()
+        public IReadOnlyList<PostBrief> GetAll()
         {
-            return _postCache.Values.OfType<Post>().ToList();
+            return _postCache.Values.OfType<Post>().Select(x => new PostBrief(x)).ToList();
         }
 
         private Post? CreatePost(string id)
@@ -44,26 +50,14 @@ namespace Walterlv.Blog.Services
 
         private Post? CreatePostCore(string id, FileInfo file)
         {
-            var (metadata, post) = PostMetadata.ExtractFromFile(file);
-            if (metadata != null && !string.IsNullOrWhiteSpace(post))
+            var (metadata, summary, content) = PostReader.ReadFromFile(file);
+            if (metadata != null && !string.IsNullOrWhiteSpace(content))
             {
                 var (publishTime, updateTime) = ParsePublishAndUpdateTime(metadata.PublishDate, metadata.Date);
                 var title = metadata.Title ?? id;
-                var markdown = Markdown.ToHtml(post);
-                return new Post(id, title, publishTime, updateTime, markdown);
+                return new Post(id, title, publishTime, updateTime, summary ?? "", content);
             }
             return null;
-        }
-
-        private static Dictionary<string, FileInfo> GenerateFileCache()
-        {
-            var idRegex = new Regex(@"(?<=\d{4}-\d{2}-\d{2}-).+(?=\.md)");
-            var directory = new DirectoryInfo(@"D:\Services\blog.walterlv.com\_posts");
-            var dictionary = from file in directory.EnumerateFiles("*.md", SearchOption.AllDirectories)
-                             let match = idRegex.Match(file.Name)
-                             where match.Success
-                             select new KeyValuePair<string, FileInfo>(match.Value, file);
-            return dictionary.ToDictionary(x => x.Key, x => x.Value);
         }
 
         private (DateTimeOffset publishTime, DateTimeOffset updateTime) ParsePublishAndUpdateTime(string? publishTimeString, string? updateTimeString)
@@ -92,6 +86,30 @@ namespace Walterlv.Blog.Services
                 var now = DateTimeOffset.Now;
                 return (now, now);
             }
+        }
+
+        private async Task StartMonitorPosts()
+        {
+            while (true)
+            {
+                var fileCache = _fileCache.Value;
+                _postCache = new ConcurrentDictionary<string, Post?>(fileCache.Select(x => new KeyValuePair<string, Post?>(x.Key, CreatePostCore(x.Key, x.Value))));
+
+                await Task.Delay(5 * 60 * 1000);
+
+                _fileCache = new Lazy<Dictionary<string, FileInfo>>(GenerateFileCache, LazyThreadSafetyMode.PublicationOnly);
+            }
+        }
+
+        private static Dictionary<string, FileInfo> GenerateFileCache()
+        {
+            var idRegex = new Regex(@"(?<=\d{4}-\d{2}-\d{2}-).+(?=\.md)");
+            var directory = new DirectoryInfo(@"D:\Services\blog.walterlv.com\_posts");
+            var dictionary = from file in directory.EnumerateFiles("*.md", SearchOption.AllDirectories)
+                             let match = idRegex.Match(file.Name)
+                             where match.Success
+                             select new KeyValuePair<string, FileInfo>(match.Value, file);
+            return dictionary.ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

@@ -4,20 +4,19 @@ namespace Walterlv.Blog.Data
 {
     public class PostBrief
     {
-        public PostBrief(string id, string title)
+        public PostBrief(Post post)
         {
-            Id = id ?? throw new ArgumentNullException(nameof(id));
-            Title = title ?? throw new ArgumentNullException(nameof(title));
+            Id = post.Id;
+            Title = post.Title;
+            UpdateTime = post.UpdateTime;
+            PublishTime = post.PublishTime;
+            Summary = post.Summary;
         }
 
         public string Id { get; }
-
         public string Title { get; }
-
-        public string? UpdateTime { get; set; }
-        
-        public string? PublishTime { get; set; }
-
-        public string? Summary { get; set; }
+        public DateTimeOffset UpdateTime { get; }
+        public DateTimeOffset PublishTime { get; }
+        public string Summary { get; }
     }
 }

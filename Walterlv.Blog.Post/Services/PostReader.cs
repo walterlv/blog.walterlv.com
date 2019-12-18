@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Markdig;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -6,28 +7,31 @@ using YamlDotNet.Serialization;
 
 namespace Walterlv.Blog.Services
 {
-    public static class PostMetadata
+    public static class PostReader
     {
-        public static (YamlFrontMeta? metadata, string? postData) ExtractFromFile(FileInfo file)
+        public static (YamlFrontMeta? metadata, string? summary, string? content) ReadFromFile(FileInfo file)
         {
-            var (metadataPart, postPart) = SpanFromFile(file);
+            var (metadataPart, summaryPart, postPart) = SpanFromFile(file);
 
             if (string.IsNullOrWhiteSpace(metadataPart))
             {
-                return (null, null);
+                return (null, null, null);
             }
 
-            var deserializer = new Deserializer();
-            var metadata = deserializer.Deserialize<YamlFrontMeta>(metadataPart);
+            var metadata = new Deserializer().Deserialize<YamlFrontMeta>(metadataPart);
+            var summary = Markdown.ToPlainText(summaryPart ?? "").Trim();
+            var content = Markdown.ToHtml(postPart ?? "");
 
-            return (metadata, postPart);
+            return (metadata, summary, content);
         }
 
-        public static (string? metadataPart, string? postPart) SpanFromFile(FileInfo file)
+        public static (string? metadataPart, string? summary, string? postPart) SpanFromFile(FileInfo file)
         {
             bool? containsYamlMatter = null;
             var inInPostPart = false;
+            var afterSummary = false;
             var metadataLines = new List<string>();
+            var summaryLines = new List<string>();
             var postLines = new List<string>();
 
             using (var fileStream = file.OpenRead())
@@ -41,7 +45,7 @@ namespace Walterlv.Blog.Services
                         if (line == "---")
                         {
                             containsYamlMatter = true;
-                            line = reader.ReadLine()?.Trim();
+                            line = reader.ReadLine()?.Trim('\r', '\n');
                             continue;
                         }
 
@@ -52,10 +56,21 @@ namespace Walterlv.Blog.Services
                     if (inInPostPart)
                     {
                         postLines.Add(line);
+                        if (!afterSummary)
+                        {
+                            if (line == "---")
+                            {
+                                afterSummary = true;
+                            }
+                            else
+                            {
+                                summaryLines.Add(line);
+                            }
+                        }
                     }
                     else if (line != "---")
                     {
-                        metadataLines.Add(line);
+                        metadataLines.Add(line.Trim());
                     }
                     else
                     {
@@ -68,8 +83,9 @@ namespace Walterlv.Blog.Services
             }
 
             var metadataPart = string.Join('\n', metadataLines);
+            var summaryPart = string.Join('\n', summaryLines);
             var postPart = string.Join('\n', postLines);
-            return (metadataPart, postPart);
+            return (metadataPart, summaryPart, postPart);
         }
     }
 }
