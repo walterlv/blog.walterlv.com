@@ -1,6 +1,10 @@
 ﻿@page "/"
+@page "/blog/{pageNumber}"
 
+@using System.Net
+@using System.Net.Http
 @using Walterlv.Blog.Data
+@inject HttpClient Http
 @inject PostService PostService
 
 @if (postBriefList == null)
@@ -26,10 +30,29 @@ else
 }
 
 @code {
+    [Parameter]
+    public string pageNumber { get; set; }
+
     private PostBrief[] postBriefList;
 
     protected override async Task OnInitializedAsync()
     {
-        postBriefList = await PostService.GetPostBriefListAsync(0);
+        var number = 1;
+        if (pageNumber != null)
+        {
+            var value = pageNumber.StartsWith("page", StringComparison.OrdinalIgnoreCase)
+                ? pageNumber.Substring(4)
+                : "";
+            int.TryParse(value, out var result);
+            number = result + 1;
+        }
+
+        try
+        {
+            postBriefList = await Http.GetJsonAsync<PostBrief[]>($"https://localhost:4431/blog/page{number}");
+        }
+        catch (HttpRequestException)
+        {
+        }
     }
 }

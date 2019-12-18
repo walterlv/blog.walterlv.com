@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Walterlv.Blog.Services;
 
@@ -20,6 +21,10 @@ namespace Walterlv.Blog.Controllers
         [HttpGet("{pageId}")]
         public ActionResult<Post> Get(string pageId)
         {
+            if (pageId.EndsWith(".html"))
+            {
+                pageId = pageId.Substring(0, pageId.Length - 5);
+            }
             var post = _postGenerator.Get(pageId);
             if (post == null)
             {

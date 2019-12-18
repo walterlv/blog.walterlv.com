@@ -1,13 +1,31 @@
-﻿@page "/post/{id}.html"
+﻿@page "/post/{pageId}"
 
-<h1>Counter</h1>
+@using System.Net
+@using System.Net.Http
+@inject HttpClient Http
 
-<p>Current count: @currentCount</p>
+<h1>@title</h1>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+@postContent
 
 @code {
     [Parameter]
-    public string currentCount { get; set; }
+    public string pageId { get; set; }
+    
+    private string title;
 
+    private MarkupString postContent;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var post = await Http.GetJsonAsync<Walterlv.Blog.Post>($"https://localhost:4431/post/{pageId}");
+            title = post.Title;
+            postContent = new MarkupString(post.Content);
+        }
+        catch (HttpRequestException)
+        {
+        }
+    }
 }

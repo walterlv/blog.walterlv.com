@@ -4,7 +4,11 @@ namespace Walterlv.Blog
 {
     public class Post
     {
-        public Post(string id, string title, DateTimeOffset publishTime, DateTimeOffset updateTime, string summary, string content)
+        public Post()
+        {
+        }
+
+        public Post(string id, string title, DateTimeOffset publishTime, DateTimeOffset updateTime, string summary, string content, bool isPublished)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
             Title = title ?? throw new ArgumentNullException(nameof(title));
@@ -12,13 +16,15 @@ namespace Walterlv.Blog
             UpdateTime = updateTime;
             Summary = summary;
             Content = content ?? throw new ArgumentNullException(nameof(content));
+            IsPublished = isPublished;
         }
 
-        public string Id { get; }
-        public string Title { get; }
-        public DateTimeOffset UpdateTime { get; }
-        public DateTimeOffset PublishTime { get; }
-        public string Summary { get; }
-        public string Content { get; }
+        public string Id { get; set; } = "";
+        public string Title { get; set; } = "";
+        public DateTimeOffset UpdateTime { get; set; } = DateTimeOffset.MinValue;
+        public DateTimeOffset PublishTime { get; set; } = DateTimeOffset.MinValue;
+        public string Summary { get; set; } = "";
+        public string Content { get; set; } = "";
+        public bool IsPublished { get; set; } = true;
     }
 }

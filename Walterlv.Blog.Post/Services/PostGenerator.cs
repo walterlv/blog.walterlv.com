@@ -19,7 +19,7 @@ namespace Walterlv.Blog.Services
 
         public PostGenerator()
         {
-            StartMonitorPosts();
+            _ = StartMonitorPosts();
         }
 
         public Post? Get(string id)
@@ -35,7 +35,7 @@ namespace Walterlv.Blog.Services
 
         public IReadOnlyList<PostBrief> GetAll()
         {
-            return _postCache.Values.OfType<Post>().Select(x => new PostBrief(x)).ToList();
+            return _postCache.Values.OfType<Post>().Where(x => x.IsPublished).Select(x => new PostBrief(x)).OrderByDescending(x => x.UpdateTime).ToList();
         }
 
         private Post? CreatePost(string id)
@@ -55,7 +55,7 @@ namespace Walterlv.Blog.Services
             {
                 var (publishTime, updateTime) = ParsePublishAndUpdateTime(metadata.PublishDate, metadata.Date);
                 var title = metadata.Title ?? id;
-                return new Post(id, title, publishTime, updateTime, summary ?? "", content);
+                return new Post(id, title, publishTime, updateTime, summary ?? "", content, metadata.IsPublished);
             }
             return null;
         }
