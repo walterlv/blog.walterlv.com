@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Walterlv.Blog
 {
     public class Post
     {
-        public Post(string id)
+        public Post(string id, string title, DateTimeOffset publishTime, DateTimeOffset updateTime, string content)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
+            Title = title ?? throw new ArgumentNullException(nameof(title));
+            PublishTime = publishTime;
+            UpdateTime = updateTime;
+            Content = content ?? throw new ArgumentNullException(nameof(content));
         }
 
-        public string Id { get; set; }
+        public string Id { get; }
 
-        public string? Title { get; set; }
+        public string Title { get; }
 
-        public string? UpdateTime { get; set; }
+        public DateTimeOffset UpdateTime { get; }
 
-        public string? PublishTime { get; set; }
+        public DateTimeOffset PublishTime { get; }
 
-        public string? Content { get; set; }
+        public string Content { get; }
     }
 }
