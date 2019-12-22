@@ -1,4 +1,5 @@
-﻿using Markdig;
+﻿using Jurassic;
+using Markdig;
 using Pek.Markdig.HighlightJs;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,11 @@ namespace Walterlv.Blog.Services
 
             var metadata = new Deserializer().Deserialize<YamlFrontMeta>(metadataPart);
             var summary = Markdown.ToPlainText(summaryPart ?? "").Trim();
-            var pipeline = new MarkdownPipelineBuilder()
-                .UseAdvancedExtensions()
-                //.UseHighlightJs()
-                .Build();
-            var content = Markdown.ToHtml(postPart ?? "", pipeline);
 
+            var content = Markdown.ToHtml(postPart ?? "", new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .Build());
+            content = content.Replace("<pre>", @"<pre class=""prettyprint"">");
             return (metadata, summary, content);
         }
 
