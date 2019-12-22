@@ -23,16 +23,18 @@ namespace Walterlv.Blog.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PostBrief> Get()
+        public ActionResult<IReadOnlyList<PostBrief>> Get()
         {
-            return _postGenerator.GetAll();
+            var list = _postGenerator.GetAll().ToList();
+            return list;
         }
 
 
         [HttpGet("page{pageIndex}")]
-        public IEnumerable<PostBrief> Get(int pageIndex)
+        public ActionResult<IReadOnlyList<PostBrief>> Get(int pageIndex)
         {
-            return _postGenerator.GetAll().Skip(pageIndex * 30).Take(30);
+            var list = _postGenerator.GetAll().Skip(pageIndex * 30).Take(30).ToList();
+            return list.Count == 0 ? NotFound() : (ActionResult<IReadOnlyList<PostBrief>>)list;
         }
     }
 }

@@ -18,7 +18,7 @@ else
             @foreach (var postBrief in postBriefList)
             {
                 <li>
-                    <a href="@($"/post/{@postBrief.Id}.html")">
+                    <a href="@($"/post/{@postBrief.Id}")">
                         <h3>@postBrief.Title</h3>
                         <div>@postBrief.UpdateTime</div>
                         <div>@postBrief.Summary</div>
@@ -37,14 +37,14 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var number = 1;
+        var number = 0;
         if (pageNumber != null)
         {
             var value = pageNumber.StartsWith("page", StringComparison.OrdinalIgnoreCase)
                 ? pageNumber.Substring(4)
                 : "";
             int.TryParse(value, out var result);
-            number = result + 1;
+            number = result - 1;
         }
 
         try
