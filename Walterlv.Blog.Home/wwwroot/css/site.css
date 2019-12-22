@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: #171717;
     color: #e3e3e3;
 }
@@ -36,6 +36,15 @@ app {
     position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.tag {
+    background-color: #282C34;
+    padding: 2px 4px 2px 8px;
+    margin: 1rem 2rem 1rem 0;
+    border-radius: 4px;
+    color: #666;
+    font-size: 0.75rem;
 }
 
 .top-row {
@@ -155,17 +164,27 @@ app {
         list-style-type: none;
     }
 
-    .post-list ul li {
-        margin: 2rem 0 0 0;
-    }
+        .post-list ul li {
+            padding: 2rem 1rem 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+            .post-list ul li:hover {
+                background-color: #252526;
+            }
+
+            .post-list ul li a {
+                text-decoration: none;
+            }
 
     .post-list a {
-        color: #bbb;
+        color: #666;
     }
 
     .post-list a h3 {
         color: white;
         font-size: 1.5rem;
+        font-weight: 300;
     }
 
 .post-content {
@@ -177,7 +196,7 @@ app {
         font-size: 2rem;
         line-height: 2.4rem;
         font-weight: 300;
-        margin: 3rem 0 2rem;
+        margin: 3rem 0 1rem;
     }
 
     .post-content h2, h3, h4, h5 {

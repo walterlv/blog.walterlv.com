@@ -20,7 +20,9 @@ else
                 <li>
                     <a href="@($"/post/{@postBrief.Id}")">
                         <h3>@postBrief.Title</h3>
-                        <div>@postBrief.UpdateTime</div>
+                        <time itemprop="dateUpdated" datetime="@postBrief.UpdateTime" class="date tag">
+                            @postBrief.UpdateTime
+                        </time>
                         <div>@postBrief.Summary</div>
                     </a>
                 </li>

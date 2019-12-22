@@ -12,6 +12,21 @@ else
 {
     <article class="post-content">
         <h1>@title</h1>
+        @if (metadata.PublishTime != metadata.UpdateTime)
+        {
+            <time itemprop="datePublished" datetime="@metadata.PublishTime" class="date tag">
+              发布于 @metadata.PublishTime
+            </time>
+            <time itemprop="dateUpdated" datetime="@metadata.UpdateTime" class="date tag">
+                更新于 @metadata.UpdateTime
+            </time>
+        }
+        else
+        {
+            <time itemprop="dateUpdated" datetime="@metadata.UpdateTime" class="date tag">
+              @metadata.UpdateTime
+            </time>
+        }
         @postContent
     </article>
 }
@@ -24,6 +39,8 @@ else
 
     private string title;
 
+    private Walterlv.Blog.Post metadata;
+
     private MarkupString postContent;
 
     protected override async Task OnInitializedAsync()
@@ -32,6 +49,7 @@ else
         {
             var post = await Http.GetJsonAsync<Walterlv.Blog.Post>($"https://localhost:4431/post/{pageId}");
             title = post.Title;
+            metadata = post;
             postContent = new MarkupString(post.Content);
         }
         catch (HttpRequestException)
