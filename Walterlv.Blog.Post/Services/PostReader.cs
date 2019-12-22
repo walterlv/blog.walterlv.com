@@ -22,10 +22,12 @@ namespace Walterlv.Blog.Services
 
             var metadata = new Deserializer().Deserialize<YamlFrontMeta>(metadataPart);
             var summary = Markdown.ToPlainText(summaryPart ?? "").Trim();
+            postPart ??= "";
+            postPart = postPart.Replace("](/static/posts/", "](https://localhost:4431/static/posts/");
 
             try
             {
-                var content = Markdown.ToHtml(postPart ?? "", new MarkdownPipelineBuilder()
+                var content = Markdown.ToHtml(postPart, new MarkdownPipelineBuilder()
                     .UseAdvancedExtensions()
                     .UseHighlightJs()
                     .Build());
@@ -33,7 +35,7 @@ namespace Walterlv.Blog.Services
             }
             catch (JavaScriptException)
             {
-                var content = Markdown.ToHtml(postPart ?? "", new MarkdownPipelineBuilder()
+                var content = Markdown.ToHtml(postPart, new MarkdownPipelineBuilder()
                     .UseAdvancedExtensions()
                     .Build());
                 return (metadata, summary, content);
@@ -90,7 +92,6 @@ namespace Walterlv.Blog.Services
                     else
                     {
                         inInPostPart = true;
-                        postLines.Add(line);
                     }
 
                     line = reader.ReadLine()?.Trim('\r', '\n');

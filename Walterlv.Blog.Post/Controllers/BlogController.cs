@@ -29,7 +29,6 @@ namespace Walterlv.Blog.Controllers
             return list;
         }
 
-
         [HttpGet("page{pageIndex}")]
         public ActionResult<IReadOnlyList<PostBrief>> Get(int pageIndex)
         {

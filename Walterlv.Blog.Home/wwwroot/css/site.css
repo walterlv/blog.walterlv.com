@@ -2,8 +2,8 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: #222426;
-    color: #cccccc;
+    background: #171717;
+    color: #e3e3e3;
 }
 
 a, .btn-link {
@@ -14,6 +14,22 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+pre {
+    border: 1px solid #454545;
+}
+
+    pre code {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        color: #abb2bf;
+        background: #282c34;
+    }
+
+hr {
+    border-top-color: #666;
 }
 
 app {
@@ -129,7 +145,7 @@ app {
             }
 
 .post-list {
-    max-width: 50rem;
+    max-width: 60rem;
     margin: 0 auto;
 }
 
@@ -153,33 +169,80 @@ app {
     }
 
 .post-content {
-    max-width: 50rem;
+    max-width: 60rem;
     margin: 0 auto;
 }
 
     .post-content h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         line-height: 2.4rem;
         font-weight: 300;
+        margin: 3rem 0 2rem;
     }
+
+    .post-content h2, h3, h4, h5 {
+        color: white;
+    }
+
+    .post-content h2 {
+        font-size: 1.6rem;
+        margin: 2rem 0 0.5rem 0;
+    }
+
+    .post-content h3 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 0.5rem 0;
+    }
+
+    .post-content img {
+        max-width: 100%;
+        display: block;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .post-content img:hover {
+            filter: drop-shadow(0 0 4px);
+        }
 
     .post-content pre .hljs-addition, .hljs-deletion {
         margin: 0 -0.5rem;
-        padding: 0 0.5rem;
-        width: calc(100% + 0.95rem);
+        padding: 0 0 0 0.5rem;
+        width: 300%;
         display: inline-block;
     }
 
-    .post-content pre .hljs-addition {
-        background-color: rgba(152, 195, 121, 0.2);
+    .post-content pre .hljs-deletion {
+        background-color: #640000;
+        color: unset;
     }
 
-    .post-content pre .hljs-deletion {
-        background-color: rgba(224, 108, 117, 0.2);
+    .post-content pre .hljs-addition {
+        background-color: #006400;
+        color: white;
     }
 
 .content {
     padding-top: 1.1rem;
+}
+
+.content strong {
+    color: white;
+}
+
+section.comments {
+    width: 60rem;
+    margin: 0 auto;
+}
+
+    section.comments .utterances
+    {
+        margin: 0;
+    }
+
+.comments-header {
+    width: 60rem;
+    margin: 0 auto;
 }
 
 .navbar-toggler {
