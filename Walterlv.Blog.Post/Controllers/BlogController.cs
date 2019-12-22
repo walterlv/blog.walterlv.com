@@ -25,7 +25,11 @@ namespace Walterlv.Blog.Controllers
         [HttpGet]
         public ActionResult<IReadOnlyList<PostBrief>> Get()
         {
-            var list = _postGenerator.GetAll().ToList();
+            var list = _postGenerator.GetAll().Select(x => new PostBrief
+            {
+                Id = x.Id,
+                Title = x.Title,
+            }).ToList();
             return list;
         }
 

@@ -19,11 +19,12 @@
     },
     "Walterlv.Blog.Post": {
       "commandName": "Project",
-      "launchUrl": "blog/page2",
+      "launchBrowser": true,
+      "launchUrl": "static/posts/2019-09-07-preview-of-window-style.gif",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:4431"
+      "applicationUrl": "http://localhost:4431"
     }
   }
 }
