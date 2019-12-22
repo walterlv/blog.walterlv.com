@@ -2,8 +2,12 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://s.blog.walterlv.com",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:56506",
+      "applicationUrl": "http://localhost:4431",
       "sslPort": 44311
     }
   },
@@ -12,14 +16,14 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "static/posts/2019-09-07-preview-of-window-style.gif",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "use64Bit": true
     },
     "Walterlv.Blog.Post": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "static/posts/2019-09-07-preview-of-window-style.gif",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

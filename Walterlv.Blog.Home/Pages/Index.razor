@@ -4,8 +4,7 @@
 @using System.Net
 @using System.Net.Http
 @using Walterlv.Blog.Data
-@inject HttpClient Http
-@inject PostService PostService
+@inject PostGenerator _postGenerator
 
 @if (postBriefList == null)
 {
@@ -37,7 +36,7 @@ else
 
     private PostBrief[] postBriefList;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         var number = 0;
         if (pageNumber != null)
@@ -48,13 +47,7 @@ else
             int.TryParse(value, out var result);
             number = result - 1;
         }
-
-        try
-        {
-            postBriefList = await Http.GetJsonAsync<PostBrief[]>($"https://localhost:4431/blog/page{number}");
-        }
-        catch (HttpRequestException)
-        {
-        }
+        
+        postBriefList = _postGenerator.GetAll().Skip(number * 30).Take(30).ToArray();
     }
 }

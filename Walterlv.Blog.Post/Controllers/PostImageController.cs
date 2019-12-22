@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Walterlv.Blog.Controllers
         [HttpGet("{imageId}")]
         public FileResult? Get(string imageId)
         {
-            var path = Path.Combine(@"D:\Services\blog.walterlv.com\static\posts", imageId);
+            var path = Path.Combine(@"D:\Services\walterlv.github.io\static\posts", imageId);
             if (System.IO.File.Exists(path))
             {
                 var content = System.IO.File.ReadAllBytes(path);

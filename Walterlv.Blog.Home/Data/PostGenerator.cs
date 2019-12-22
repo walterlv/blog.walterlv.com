@@ -8,21 +8,20 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Walterlv.Blog.Data;
 
-namespace Walterlv.Blog.Services
+namespace Walterlv.Blog.Data
 {
     public class PostGenerator
     {
         private Lazy<Dictionary<string, FileInfo>> _fileCache = new Lazy<Dictionary<string, FileInfo>>(GenerateFileCache, LazyThreadSafetyMode.PublicationOnly);
-        private ConcurrentDictionary<string, Post?> _postCache = new ConcurrentDictionary<string, Post?>();
+        private ConcurrentDictionary<string, Post> _postCache = new ConcurrentDictionary<string, Post>();
 
         public PostGenerator()
         {
             _ = StartMonitorPosts();
         }
 
-        public Post? Get(string id)
+        public Post Get(string id)
         {
             var value = _postCache.GetOrAdd(id, CreatePost);
             if (value is null)
@@ -38,7 +37,7 @@ namespace Walterlv.Blog.Services
             return _postCache.Values.OfType<Post>().Where(x => x.IsPublished).Select(x => new PostBrief(x)).OrderByDescending(x => x.UpdateTime).ToList();
         }
 
-        private Post? CreatePost(string id)
+        private Post CreatePost(string id)
         {
             var fileCache = _fileCache.Value;
             if (fileCache.TryGetValue(id, out var path))
@@ -48,7 +47,7 @@ namespace Walterlv.Blog.Services
             return null;
         }
 
-        private Post? CreatePostCore(string id, FileInfo file)
+        private Post CreatePostCore(string id, FileInfo file)
         {
             var (metadata, summary, content) = PostReader.ReadFromFile(file);
             if (metadata != null && !string.IsNullOrWhiteSpace(content))
@@ -60,7 +59,7 @@ namespace Walterlv.Blog.Services
             return null;
         }
 
-        private (DateTimeOffset publishTime, DateTimeOffset updateTime) ParsePublishAndUpdateTime(string? publishTimeString, string? updateTimeString)
+        private (DateTimeOffset publishTime, DateTimeOffset updateTime) ParsePublishAndUpdateTime(string publishTimeString, string updateTimeString)
         {
             var hasPublishTime = DateTimeOffset.TryParse(publishTimeString, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out var publishTime);
             var hasUpdateTime = DateTime.TryParse(updateTimeString, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out var updateTime);
@@ -93,7 +92,7 @@ namespace Walterlv.Blog.Services
             while (true)
             {
                 var fileCache = _fileCache.Value;
-                _postCache = new ConcurrentDictionary<string, Post?>(fileCache.Select(x => new KeyValuePair<string, Post?>(x.Key, CreatePostCore(x.Key, x.Value))));
+                _postCache = new ConcurrentDictionary<string, Post>(fileCache.Select(x => new KeyValuePair<string, Post>(x.Key, CreatePostCore(x.Key, x.Value))));
 
                 await Task.Delay(5 * 60 * 1000);
 

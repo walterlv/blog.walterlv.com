@@ -29,7 +29,7 @@ namespace Walterlv.Blog
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<PostService>();
+            services.AddSingleton(new PostGenerator());
             services.AddSingleton<HttpClient>();
         }
 
