@@ -19,7 +19,6 @@
     },
     "Walterlv.Blog.Post": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "blog/page2",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

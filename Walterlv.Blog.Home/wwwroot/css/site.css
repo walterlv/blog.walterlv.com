@@ -7,7 +7,7 @@ html, body {
 }
 
 a, .btn-link {
-    color: #0366d6;
+    color: #22A6F2;
 }
 
 .btn-primary {
@@ -154,7 +154,6 @@ app {
             }
 
 .post-list {
-    max-width: 60rem;
     margin: 0 auto;
 }
 
@@ -188,7 +187,6 @@ app {
     }
 
 .post-content {
-    max-width: 60rem;
     margin: 0 auto;
 }
 
@@ -250,7 +248,6 @@ app {
 }
 
 section.comments {
-    width: 60rem;
     margin: 0 auto;
 }
 
@@ -260,7 +257,6 @@ section.comments {
     }
 
 .comments-header {
-    width: 60rem;
     margin: 0 auto;
 }
 
@@ -311,6 +307,10 @@ section.comments {
     .main .top-row a, .main .top-row .btn-link {
         margin-left: 0;
     }
+}
+
+.post-list, .post-content, section.comments, .comments-header {
+    max-width: 60rem;
 }
 
 @media (min-width: 768px) {
