@@ -1,15 +1,20 @@
-﻿@page "/post"
-@page "/post/{pageId}"
+﻿@page "/post/{pageId}"
 
 @using System.Net
 @using System.Net.Http
 @inject HttpClient Http
 
-
-<article class="post-content">
-    <h1>@title</h1>
-    @postContent
-</article>
+@if (title == null)
+{
+    <p><em>正在下载博客...</em></p>
+}
+else
+{
+    <article class="post-content">
+        <h1>@title</h1>
+        @postContent
+    </article>
+}
 
 @code {
     [Parameter]

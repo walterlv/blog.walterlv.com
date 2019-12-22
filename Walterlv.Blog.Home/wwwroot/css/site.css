@@ -16,16 +16,6 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-pre {
-    background: #242424;
-    padding: 1rem;
-    border-radius: 4px;
-}
-
-pre code {
-    color: #ccc;
-}
-
 app {
     position: relative;
     display: flex;
@@ -171,6 +161,14 @@ app {
         font-size: 1.8rem;
         line-height: 2.4rem;
         font-weight: 300;
+    }
+
+
+    .post-content pre {
+        background: #242424;
+        padding: 1rem;
+        border-radius: 4px;
+        color: #ccc;
     }
 
 .content {
