@@ -163,12 +163,19 @@ app {
         font-weight: 300;
     }
 
+    .post-content pre .hljs-addition, .hljs-deletion {
+        margin: 0 -0.5rem;
+        padding: 0 0.5rem;
+        width: calc(100% + 0.95rem);
+        display: inline-block;
+    }
 
-    .post-content pre {
-        background: #242424;
-        padding: 1rem;
-        border-radius: 4px;
-        color: #ccc;
+    .post-content pre .hljs-addition {
+        background-color: rgba(152, 195, 121, 0.2);
+    }
+
+    .post-content pre .hljs-deletion {
+        background-color: rgba(224, 108, 117, 0.2);
     }
 
 .content {
