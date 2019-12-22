@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Walterlv.Blog.Services;
 
 namespace Walterlv.Blog
 {
@@ -29,7 +28,6 @@ namespace Walterlv.Blog
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton(new PostGenerator());
             services.AddSingleton<HttpClient>();
 
             services.Configure<IISServerOptions>(options =>
