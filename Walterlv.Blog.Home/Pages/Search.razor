@@ -1,0 +1,54 @@
+﻿@page "/search"
+
+@using System.Net
+@using System.Net.Http
+@using Walterlv.Blog.Data
+@inject HttpClient Http
+@inject PostService PostService
+
+@if (postBriefList == null)
+{
+    <p><em>正在下载所有博客的搜索信息...</em></p>
+}
+else
+{
+    <p>搜索功能正在开发中，请先按下 <strong>Ctrl+F</strong> 然后输入你想搜索的关键词。</p>
+    <div class="post-search-list">
+        <ul>
+            @foreach (var postBrief in postBriefList)
+            {
+                <li>
+                    <a href="@($"/post/{@postBrief.Id}")">@postBrief.Title</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string pageNumber { get; set; }
+
+    private PostBrief[] postBriefList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var number = 0;
+        if (pageNumber != null)
+        {
+            var value = pageNumber.StartsWith("page", StringComparison.OrdinalIgnoreCase)
+                ? pageNumber.Substring(4)
+                : "";
+            int.TryParse(value, out var result);
+            number = result - 1;
+        }
+
+        try
+        {
+            postBriefList = await Http.GetJsonAsync<PostBrief[]>($"https://localhost:4431/blog");
+        }
+        catch (HttpRequestException)
+        {
+        }
+    }
+}
