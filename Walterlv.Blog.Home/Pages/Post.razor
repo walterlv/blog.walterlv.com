@@ -1,17 +1,20 @@
-﻿@page "/post/{pageId}"
+﻿@page "/post"
+@page "/post/{pageId}"
 
 @using System.Net
 @using System.Net.Http
 @inject HttpClient Http
 
-<h1>@title</h1>
 
-@postContent
+<article class="post-content">
+    <h1>@title</h1>
+    @postContent
+</article>
 
 @code {
     [Parameter]
     public string pageId { get; set; }
-    
+
     private string title;
 
     private MarkupString postContent;

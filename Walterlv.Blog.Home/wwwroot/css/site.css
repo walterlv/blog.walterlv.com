@@ -2,8 +2,8 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: #181A1B;
-    color: #FFFFFF;
+    background: #222426;
+    color: #cccccc;
 }
 
 a, .btn-link {
@@ -14,6 +14,16 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+pre {
+    background: #242424;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+pre code {
+    color: #ccc;
 }
 
 app {
@@ -127,6 +137,41 @@ app {
                 background-color: #1570A6;
                 color: white;
             }
+
+.post-list {
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+    .post-list ul {
+        margin: 2rem 0 1rem 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .post-list ul li {
+        margin: 2rem 0 0 0;
+    }
+
+    .post-list a {
+        color: #bbb;
+    }
+
+    .post-list a h3 {
+        color: white;
+        font-size: 1.5rem;
+    }
+
+.post-content {
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+    .post-content h1 {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+        font-weight: 300;
+    }
 
 .content {
     padding-top: 1.1rem;
