@@ -25,11 +25,28 @@ namespace Walterlv.Blog
                 {
                     options.Listen(IPAddress.Any, 4431, listenOptions =>
                     {
-                        var passward = Console.ReadLine().Trim();
-                        Console.CursorTop--;
-                        listenOptions.UseHttps(@"D:\Services\ssl\blog-walterlv-com-iis-1223075723.pfx", passward);
+                        var password = ReadPassword();
+                        listenOptions.UseHttps(@"D:\Services\ssl\blog-walterlv-com-iis-1223075723.pfx", password);
                     });
                 })
             .Build();
+
+        private static string ReadPassword()
+        {
+            if (Console.IsInputRedirected)
+            {
+                return Console.ReadLine().Trim();
+            }
+            else
+            {
+                Console.Write("Password: ");
+                var password = Console.ReadLine().Trim();
+                if (Console.IsOutputRedirected)
+                {
+                    Console.CursorTop--;
+                }
+                return password;
+            }
+        }
     }
 }
