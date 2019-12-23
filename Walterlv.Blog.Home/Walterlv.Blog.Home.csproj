@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Walterlv.Blog.Model\Walterlv.Blog.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

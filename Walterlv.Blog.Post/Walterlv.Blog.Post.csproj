@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.18.0" />
-    <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.4.0" />
-    <PackageReference Include="Jurassic" Version="3.0.0" />
-    <PackageReference Include="YamlDotNet" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.1.0-preview4.19579.2" />
   </ItemGroup>
   
@@ -20,6 +16,4 @@
     <ProjectReference Include="..\Walterlv.Blog.Model\Walterlv.Blog.Model.csproj" />
   </ItemGroup>
   
-  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
-
 </Project>

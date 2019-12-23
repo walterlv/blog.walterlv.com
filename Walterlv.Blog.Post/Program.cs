@@ -27,7 +27,7 @@ namespace Walterlv.Blog
                     {
                         var passward = Console.ReadLine().Trim();
                         Console.CursorTop--;
-                        listenOptions.UseHttps(@"D:\WIP\Desktop\walterlv-com-iis-1213130742.pfx", passward);
+                        listenOptions.UseHttps(@"D:\Services\ssl\blog-walterlv-com-iis-1223075723.pfx", passward);
                     });
                 })
             .Build();
