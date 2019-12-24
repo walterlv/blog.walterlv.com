@@ -15,38 +15,14 @@ namespace Walterlv.Blog
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseKestrel(options =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    options.Listen(IPAddress.Any, 4431, listenOptions =>
-                    {
-                        var password = ReadPassword();
-                        listenOptions.UseHttps(@"D:\Services\ssl\blog-walterlv-com-iis-1223075723.pfx", password);
-                    });
-                })
-            .Build();
-
-        private static string ReadPassword()
-        {
-            if (Console.IsInputRedirected)
-            {
-                return Console.ReadLine().Trim();
-            }
-            else
-            {
-                Console.Write("Password: ");
-                var password = Console.ReadLine().Trim();
-                if (Console.IsOutputRedirected)
-                {
-                    Console.CursorTop--;
-                }
-                return password;
-            }
-        }
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
