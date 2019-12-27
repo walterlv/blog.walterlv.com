@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: #2B2B2B;
+    background: #232323;
     color: #e3e3e3;
 }
 
@@ -39,12 +39,16 @@ app {
 }
 
 .tag {
-    background-color: #282C34;
+    background-color: #424245;
     padding: 2px 4px 2px 8px;
     margin: 1rem 2rem 1rem 0;
     border-radius: 4px;
-    color: #666;
+    color: #aaa;
     font-size: 0.75rem;
+}
+
+time.tag {
+    background-color: #424245;
 }
 
 .top-row {
@@ -73,7 +77,7 @@ app {
         }
 
 .sidebar {
-    background: #1B1C1D;
+    background: #323232;
 }
 
     .sidebar .top-row {
@@ -165,16 +169,16 @@ app {
         }
 
             .post-list ul li:hover {
-                background-color: #252526;
+                background-color: #323232;
             }
 
             .post-list ul li a {
                 text-decoration: none;
             }
 
-    .post-list a {
-        color: #666;
-    }
+.post-list a {
+    color: #999;
+}
 
     .post-list a h3 {
         color: white;
@@ -294,8 +298,13 @@ footer {
     }
 }
 
-.post-list, .post-content, section.comments, .comments-header, footer {
+.post-content, section.comments, .comments-header, footer {
     max-width: 60rem;
+    margin: 0 auto;
+}
+
+.post-list {
+    max-width: 62rem;
     margin: 0 auto;
 }
 
