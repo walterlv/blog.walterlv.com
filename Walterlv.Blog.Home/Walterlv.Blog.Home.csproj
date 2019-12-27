@@ -9,6 +9,8 @@
   <ItemGroup>
     <PackageReference Include="dotnetCampus.CommandLine" Version="1.2.1" />
     <PackageReference Include="Markdig" Version="0.18.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="Pek.Markdig.HighlightJs" Version="0.4.0" />
     <PackageReference Include="Jurassic" Version="3.0.0" />
     <PackageReference Include="YamlDotNet" Version="8.0.0" />

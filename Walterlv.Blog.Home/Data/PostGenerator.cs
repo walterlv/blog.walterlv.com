@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -108,7 +107,11 @@ namespace Walterlv.Blog.Data
                              let match = idRegex.Match(file.Name)
                              where match.Success
                              select new KeyValuePair<string, FileInfo>(match.Value, file);
-            return dictionary.ToDictionary(x => x.Key, x => x.Value);
+            var pageDirectory = new DirectoryInfo(@"D:\Services\walterlv.github.io");
+            var pageDictionary = from file in pageDirectory.EnumerateFiles("*.md", SearchOption.TopDirectoryOnly)
+                                 let url = Path.GetFileNameWithoutExtension(file.Name).ToLower(CultureInfo.InvariantCulture)
+                                 select new KeyValuePair<string, FileInfo>(url, file);
+            return dictionary.Concat(pageDictionary).ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }
