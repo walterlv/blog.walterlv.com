@@ -23,7 +23,9 @@ namespace Walterlv.Blog.Data
             var metadata = new Deserializer().Deserialize<YamlFrontMeta>(metadataPart);
             var summary = Markdown.ToPlainText(summaryPart ?? "").Trim();
             postPart ??= "";
-            postPart = postPart.Replace("](/static/posts/", $"]({PostStaticRedirector.SHost}/static/posts/", StringComparison.Ordinal);
+            postPart = postPart
+                .Replace("](/img/", $"]({PostStaticRedirector.SHost}/img/", StringComparison.Ordinal)
+                .Replace("](/static/posts/", $"]({PostStaticRedirector.SHost}/static/posts/", StringComparison.Ordinal);
 
             try
             {

@@ -30,13 +30,13 @@ namespace Walterlv.Blog
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton(new PostGenerator());
             services.AddSingleton<HttpClient>();
             services.AddSingleton(sp =>
             {
                 var options = CommandLine.Parse(Environment.GetCommandLineArgs().Skip(1).ToArray()).As<Options>();
                 return new PostStaticRedirector(options.StaticHost);
             });
+            services.AddSingleton(sp => new PostGenerator(sp.GetService<PostStaticRedirector>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

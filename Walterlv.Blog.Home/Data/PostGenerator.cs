@@ -12,11 +12,13 @@ namespace Walterlv.Blog.Data
 {
     public class PostGenerator
     {
+        private readonly PostStaticRedirector _postStatic;
         private Lazy<Dictionary<string, FileInfo>> _fileCache = new Lazy<Dictionary<string, FileInfo>>(GenerateFileCache, LazyThreadSafetyMode.PublicationOnly);
         private ConcurrentDictionary<string, Post> _postCache = new ConcurrentDictionary<string, Post>();
 
-        public PostGenerator()
+        public PostGenerator(PostStaticRedirector postStatic)
         {
+            _postStatic = postStatic;
             _ = StartMonitorPosts();
         }
 
@@ -31,10 +33,11 @@ namespace Walterlv.Blog.Data
             return value;
         }
 
-        public IReadOnlyList<PostBrief> GetAll()
-        {
-            return _postCache.Values.OfType<Post>().Where(x => x.IsPublished).Select(x => new PostBrief(x)).OrderByDescending(x => x.UpdateTime).ToList();
-        }
+        public IReadOnlyList<PostBrief> GetAll() => _postCache.Values
+            .OfType<Post>()
+            .Where(x => x.IsPublished && x.PublishTime > DateTimeOffset.MinValue)
+            .Select(x => new PostBrief(x))
+            .OrderByDescending(x => x.UpdateTime).ToList();
 
         private Post CreatePost(string id)
         {
@@ -81,8 +84,8 @@ namespace Walterlv.Blog.Data
             else
             {
                 // 这篇博客没有时间，通常说明这根本就不是一篇博客。
-                var now = DateTimeOffset.Now;
-                return (now, now);
+                var unset = DateTimeOffset.MinValue;
+                return (unset, unset);
             }
         }
 

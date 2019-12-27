@@ -1,0 +1,23 @@
+﻿@if (PublishTime != UpdateTime)
+{
+    <time itemprop="datePublished" datetime="@PublishTime" class="date tag">
+        发布于 @PublishTime
+    </time>
+    <time itemprop="dateUpdated" datetime="@UpdateTime" class="date tag">
+        更新于 @UpdateTime
+    </time>
+}
+else if (PublishTime > DateTimeOffset.MinValue)
+{
+    <time itemprop="dateUpdated" datetime="@UpdateTime" class="date tag">
+        @UpdateTime
+    </time>
+}
+
+@code {
+    [Parameter]
+    public DateTimeOffset PublishTime { get; set; }
+
+    [Parameter]
+    public DateTimeOffset UpdateTime { get; set; }
+}

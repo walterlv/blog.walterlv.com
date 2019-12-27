@@ -4,44 +4,30 @@
 
 @if (title == null)
 {
-    <p><em>正在下载页面...</em></p>
+<p><em>正在下载页面...</em></p>
 }
 else
 {
-    <article class="post-content">
-        <h1>@title</h1>
-        @if (metadata.PublishTime != metadata.UpdateTime)
-        {
-            <time itemprop="dateUpdated" datetime="@metadata.UpdateTime" class="date tag">
-                更新于 @metadata.UpdateTime
-            </time>
-            <time itemprop="datePublished" datetime="@metadata.PublishTime" class="date tag">
-                发布于 @metadata.PublishTime
-            </time>
-        }
-        else
-        {
-            <time itemprop="dateUpdated" datetime="@metadata.UpdateTime" class="date tag">
-                发布于 @metadata.UpdateTime
-            </time>
-        }
-        @postContent
-        <p>欢迎阅读我的博客，请点击 <a href="https://blog.walterlv.com/feed.xml">RSS 订阅</a>，或者<a href="https://walterlv.blog.csdn.net/">前往 CSDN 关注我的主页</a>。</p>
-        <p>
-            <a rel="知识共享许可协议" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                <img alt="知识共享许可协议" src="@Static.Host/img/by-nc-sa.svg" />
-            </a>
-            全站作品采用
-            <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
-            进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
-            <strong>吕毅</strong>
-            （包含链接：
-            <a href="https://blog.walterlv.com">https://blog.walterlv.com</a>
-            ），不得用于商业目的，基于全站任何文章修改后的作品务必以相同的许可发布。如有任何疑问，请
-            <a href="mailto:walter.lv@qq.com">与我联系 (walter.lv@qq.com)</a>
-            。
-        </p>
-    </article>
+<article class="post-content">
+    <h1>@title</h1>
+    <TimeMetadata PublishTime="@metadata.PublishTime" UpdateTime="@metadata.UpdateTime" />
+    @postContent
+    <p>欢迎阅读我的博客，请点击 <a href="https://blog.walterlv.com/feed.xml">RSS 订阅</a>，或者<a href="https://walterlv.blog.csdn.net/">前往 CSDN 关注我的主页</a>。</p>
+    <p>
+        <a rel="知识共享许可协议" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+            <img alt="知识共享许可协议" src="@Static.Host/img/by-nc-sa.svg" />
+        </a>
+        全站作品采用
+        <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+        进行许可。欢迎转载、使用、重新发布，但务必保留文章署名
+        <strong>吕毅</strong>
+        （包含链接：
+        <a href="https://blog.walterlv.com">https://blog.walterlv.com</a>
+        ），不得用于商业目的，基于全站任何文章修改后的作品务必以相同的许可发布。如有任何疑问，请
+        <a href="mailto:walter.lv@qq.com">与我联系 (walter.lv@qq.com)</a>
+        。
+    </p>
+</article>
 }
 
 <PostComment></PostComment>
