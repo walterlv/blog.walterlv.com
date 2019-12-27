@@ -3,6 +3,7 @@
 
 @using System.Net
 @using System.Net.Http
+@using System.Globalization
 @using Walterlv.Blog.Data
 @inject PostGenerator _postGenerator
 
@@ -20,7 +21,7 @@ else
                     <a href="@($"/post/{@postBrief.Id}")">
                         <h3>@postBrief.Title</h3>
                         <time itemprop="dateUpdated" datetime="@postBrief.UpdateTime" class="date tag">
-                            @postBrief.UpdateTime
+                            @postBrief.UpdateTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture)
                         </time>
                         <div>@postBrief.Summary</div>
                     </a>
