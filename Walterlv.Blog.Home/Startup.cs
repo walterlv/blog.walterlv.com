@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using dotnetCampus.Cli;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,11 @@ namespace Walterlv.Blog
             services.AddServerSideBlazor();
             services.AddSingleton(new PostGenerator());
             services.AddSingleton<HttpClient>();
+            services.AddSingleton(sp =>
+            {
+                var options = CommandLine.Parse(Environment.GetCommandLineArgs().Skip(1).ToArray()).As<Options>();
+                return new PostStaticRedirector(options.StaticHost);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

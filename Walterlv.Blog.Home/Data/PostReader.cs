@@ -23,7 +23,7 @@ namespace Walterlv.Blog.Data
             var metadata = new Deserializer().Deserialize<YamlFrontMeta>(metadataPart);
             var summary = Markdown.ToPlainText(summaryPart ?? "").Trim();
             postPart ??= "";
-            postPart = postPart.Replace("](/static/posts/", "](https://s.blog.walterlv.com:8000/static/posts/");
+            postPart = postPart.Replace("](/static/posts/", $"]({PostStaticRedirector.SHost}/static/posts/", StringComparison.Ordinal);
 
             try
             {

@@ -1,5 +1,6 @@
 ﻿@page "/"
 @namespace Walterlv.Blog.Pages
+@inject Walterlv.Blog.Data.PostStaticRedirector Static
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = null;
@@ -13,9 +14,9 @@
     <title>吕毅 - walterlv</title>
     <meta name="author" content="walterlv" />
     <base href="~/" />
-    <link rel="stylesheet" href="https://s.blog.walterlv.com:8000/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="@Static.Host/css/bootstrap/bootstrap.min.css" />
     <link href="/css/site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://s.blog.walterlv.com:8000/css/highlight.js/styles/atom-one-dark.css">
+    <link rel="stylesheet" href="@Static.Host/css/highlight.js/styles/atom-one-dark.css">
 </head>
 <body>
     <app>
@@ -24,12 +25,13 @@
 
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
-            An error has occurred. This application may no longer respond until reloaded.
+            网页发生了错误，建议重新【刷新】网页。
         </environment>
         <environment include="Development">
+            发生了未处理的异常，请通过浏览器的开发者工具查看更多细节。
             An unhandled exception has occurred. See browser dev tools for details.
         </environment>
-        <a href="" class="reload">Reload</a>
+        <a href="" class="reload">刷新</a>
         <a class="dismiss">🗙</a>
     </div>
 
