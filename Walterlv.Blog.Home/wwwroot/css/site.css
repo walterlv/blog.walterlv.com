@@ -344,3 +344,7 @@ footer {
         padding: unset;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+
+}
