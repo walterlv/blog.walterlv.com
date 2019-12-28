@@ -10,10 +10,7 @@ using Walterlv.Blog.Data;
 namespace Walterlv.Blog.Controllers
 {
     [ApiController]
-    [Route("feed.xml")]
-    [Route("feed")]
-    [Route("rss.xml")]
-    [Route("rss")]
+    [Route("feed.xml"), Route("feed"), Route("rss.xml"), Route("rss")]
     public class RssController : Controller
     {
         private readonly PostGenerator _postGenerator;
@@ -23,8 +20,7 @@ namespace Walterlv.Blog.Controllers
             _postGenerator = postGenerator;
         }
 
-        [HttpGet]
-        [ResponseCache(Duration = 60 * 5)]
+        [HttpGet, ResponseCache(Duration = 60 * 5)]
         public IActionResult Get()
         {
             var posts = _postGenerator.GetAll(15);
