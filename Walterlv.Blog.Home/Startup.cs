@@ -56,6 +56,7 @@ namespace Walterlv.Blog
 
             app.UseHttpsRedirection();
             app.UseExternalHttpsRedirection();
+            app.UsePostLegacyUrlRedirection();
             app.UseAutoRemoveHtmlExtension();
             app.UseStaticFiles();
             app.UseRouting();
