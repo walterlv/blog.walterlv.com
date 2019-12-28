@@ -63,6 +63,7 @@ namespace Walterlv.Blog
                 {
                     var url = "https://" + context.Request.Host + context.Request.PathBase + context.Request.Path;
                     context.Response.Redirect(url);
+                    context.Response.StatusCode = 301;
                     return;
                 }
                 await next().ConfigureAwait(false);
