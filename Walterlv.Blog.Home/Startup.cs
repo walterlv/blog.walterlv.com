@@ -54,6 +54,19 @@ namespace Walterlv.Blog
             }
 
             app.UseHttpsRedirection();
+            app.Use(async (context, next) =>
+            {
+                if (!context.Request.IsHttps
+                    && "localhost" != context.Request.Host.Host
+                    && "127.0.0.1" != context.Request.Host.Host
+                    && "[::1]" != context.Request.Host.Host)
+                {
+                    var url = "https://" + context.Request.Host + context.Request.PathBase + context.Request.Path;
+                    context.Response.Redirect(url);
+                    return;
+                }
+                await next().ConfigureAwait(false);
+            });
             app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
