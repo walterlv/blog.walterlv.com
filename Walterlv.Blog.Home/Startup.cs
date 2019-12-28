@@ -60,6 +60,7 @@ namespace Walterlv.Blog
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+                endpoints.MapControllers();
             });
         }
     }

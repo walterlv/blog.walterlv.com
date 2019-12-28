@@ -34,10 +34,18 @@ namespace Walterlv.Blog.Data
         }
 
         public IReadOnlyList<PostBrief> GetAll() => _postCache.Values
+            .Where(x => x != null)
             .OfType<Post>()
             .Where(x => x.IsPublished && x.PublishTime > DateTimeOffset.MinValue)
             .Select(x => new PostBrief(x))
             .OrderByDescending(x => x.UpdateTime).ToList();
+
+        public IReadOnlyList<Post> GetAll(int count) => _postCache.Values
+            .Where(x => x != null)
+            .Where(x => x.IsPublished && x.PublishTime > DateTimeOffset.MinValue)
+            .OrderByDescending(x => x.UpdateTime)
+            .Take(count)
+            .ToList();
 
         private Post CreatePost(string id)
         {

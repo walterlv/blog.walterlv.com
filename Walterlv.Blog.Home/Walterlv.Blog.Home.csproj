@@ -15,6 +15,7 @@
     <PackageReference Include="Jurassic" Version="3.0.0" />
     <PackageReference Include="YamlDotNet" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.1.0-preview4.19579.2" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
