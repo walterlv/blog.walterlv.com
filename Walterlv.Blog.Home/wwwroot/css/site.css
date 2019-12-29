@@ -32,6 +32,20 @@ hr {
     border-top-color: #666;
 }
 
+div.announcement {
+    color: white;
+    background-color: #1570A6;
+    border-style: solid;
+    border-width: 1px;
+    margin: 2rem auto;
+    padding: 1.2rem 1.2rem 0;
+    max-width: 62rem;
+}
+
+div.error {
+    background-color: #BD4A3D;
+}
+
 app {
     position: relative;
     display: flex;
