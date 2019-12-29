@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DevExpress.Blazor.DocumentMetadata;
 using dotnetCampus.Cli;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -39,6 +40,11 @@ namespace Walterlv.Blog
             });
             services.AddSingleton(sp => new PostGenerator(sp.GetService<PostStaticRedirector>()));
             services.AddSingleton(new SiteAnalytics());
+            services.AddDocumentMetadata((serviceProvider, registrator) =>
+            {
+                var @static = (PostStaticRedirector)serviceProvider.GetService(typeof(PostStaticRedirector));
+                registrator.Default().Title("¬¿“„ - walterlv");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

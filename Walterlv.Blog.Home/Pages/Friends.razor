@@ -1,5 +1,6 @@
 ﻿@page "/friends"
 @inject SiteAnalytics Analytics
+@inject IDocumentMetadataService Metadata
 
 <div>
     <Announcement></Announcement>
@@ -10,5 +11,6 @@
     protected override void OnInitialized()
     {
         Analytics.Handle("/about", "朋友与收藏");
+        Metadata.Update(x => x.Title($"朋友与收藏 - walterlv"));
     }
 }

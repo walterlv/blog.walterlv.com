@@ -1,5 +1,6 @@
 ﻿@page "/"
 @namespace Walterlv.Blog.Pages
+@using DevExpress.Blazor.DocumentMetadata
 @inject Walterlv.Blog.Data.PostStaticRedirector Static
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
@@ -9,9 +10,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @(await Html.RenderComponentAsync<DocumentMetadataComponent>(RenderMode.ServerPrerendered))
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>吕毅 - walterlv</title>
     <meta name="author" content="walterlv" />
     <base href="~/" />
     <link rel="stylesheet" href="@Static.Host/css/bootstrap/bootstrap.min.css" />

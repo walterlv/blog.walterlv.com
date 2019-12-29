@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Walterlv.Blog.Model\Walterlv.Blog.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tools\" />
+  </ItemGroup>
+
 </Project>

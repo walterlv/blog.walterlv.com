@@ -1,5 +1,6 @@
 ﻿@page "/about"
 @inject SiteAnalytics Analytics
+@inject IDocumentMetadataService Metadata
 
 <div>
     <Announcement></Announcement>
@@ -10,5 +11,6 @@
     protected override void OnInitialized()
     {
         Analytics.Handle("/about", "关于");
+        Metadata.Update(x => x.Title($"关于吕毅 - walterlv"));
     }
 }

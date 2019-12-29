@@ -5,6 +5,7 @@
 @using Walterlv.Blog.Data
 @inject PostGenerator PostGenerator
 @inject SiteAnalytics Analytics
+@inject IDocumentMetadataService Metadata
 
 @if (postBriefList == null)
 {
@@ -32,5 +33,6 @@ else
     {
         Analytics.Handle("/about", "搜索");
         postBriefList = PostGenerator.GetAll().ToArray();
+        Metadata.Update(x => x.Title($"搜索 - walterlv"));
     }
 }

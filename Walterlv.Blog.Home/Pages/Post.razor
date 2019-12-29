@@ -6,6 +6,7 @@
 @inject PostGenerator PostGenerator
 @inject PostStaticRedirector Static
 @inject SiteAnalytics Analytics
+@inject IDocumentMetadataService Metadata
 
 @if (title == null)
 {
@@ -17,9 +18,9 @@ else
 
     <article class="post-content">
         <h1>@title</h1>
-        <TimeMetadata PublishTime="@metadata.PublishTime" UpdateTime="@metadata.UpdateTime" />
+        <TimeMetadata PublishTime="@post.PublishTime" UpdateTime="@post.UpdateTime" />
         @postContent
-        <p>本文会经常更新，请阅读原文：<a href="https://blog.walterlv.com/post/@metadata.Id">https://blog.walterlv.com/post/@metadata.Id</a>，以避免陈旧错误知识的误导，同时有更好的阅读体验。</p>
+        <p>本文会经常更新，请阅读原文：<a href="https://blog.walterlv.com/post/@post.Id">https://blog.walterlv.com/post/@post.Id</a>，以避免陈旧错误知识的误导，同时有更好的阅读体验。</p>
         <p>如果你想持续阅读我的最新博客，请点击 <a href="https://blog.walterlv.com/feed.xml">RSS 订阅</a>，或者<a href="https://walterlv.blog.csdn.net/">前往 CSDN 关注我的主页</a>。</p>
         <PostLicense></PostLicense>
 
@@ -34,7 +35,7 @@ else
 
     private string title;
 
-    private Walterlv.Blog.Post metadata;
+    private Walterlv.Blog.Post post;
 
     private MarkupString postContent;
 
@@ -47,8 +48,10 @@ else
         {
             var post = PostGenerator.Get(pageId);
             title = post.Title;
-            metadata = post;
+            this.post = post;
             postContent = new MarkupString(post.Content);
+
+            Metadata.Update(x => x.Title($"{title} - walterlv"));
         }
         finally
         {
