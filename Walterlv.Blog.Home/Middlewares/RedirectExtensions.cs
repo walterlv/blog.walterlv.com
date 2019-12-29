@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Walterlv.Blog.Middlewares
 {
@@ -27,6 +29,41 @@ namespace Walterlv.Blog.Middlewares
             }
             await next().ConfigureAwait(false);
         });
+
+        /// <summary>
+        /// 将 walterlv.com 重定向为 blog.walterlv.com
+        /// </summary>
+        /// <param name="app"><see cref="IApplicationBuilder"/>。</param>
+        /// <param name="newDomain">在旧域名中的链接都需要重定向到此域名。</param>
+        /// <param name="legacyDomains">要重定向的旧域名列表。</param>
+        /// <returns><see cref="IApplicationBuilder"/>。</returns>
+        public static IApplicationBuilder UseDomainRedirection(this IApplicationBuilder app, string newDomain, params string[] legacyDomains)
+        {
+            if (newDomain is null)
+            {
+                throw new ArgumentNullException(nameof(newDomain));
+            }
+
+            if (legacyDomains is null)
+            {
+                throw new ArgumentNullException(nameof(legacyDomains));
+            }
+
+            var toRedirectDomains = legacyDomains.ToList();
+
+            return app.Use(async (context, next) =>
+            {
+                var host = context.Request.Host.Value;
+                if (toRedirectDomains.Contains(host, StringComparer.OrdinalIgnoreCase))
+                {
+                    var url = "//" + newDomain + context.Request.PathBase + context.Request.Path;
+                    context.Response.Redirect(url);
+                    context.Response.StatusCode = 301;
+                    return;
+                }
+                await next().ConfigureAwait(false);
+            });
+        }
 
         /// <summary>
         /// 自动移除所有的 .html 后缀，并永久重定向到没有 .html 后缀的网页。

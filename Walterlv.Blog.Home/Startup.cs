@@ -56,6 +56,7 @@ namespace Walterlv.Blog
             }
 
             app.UseAnalyticsButExcluding("/img", "/css", "/js", "/_framework", "/_blazor");
+            app.UseDomainRedirection("blog.walterlv.com", "localhost");
             app.UseHttpsRedirection();
             app.UseExternalHttpsRedirection();
             app.UsePostLegacyUrlRedirection();
