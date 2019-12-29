@@ -38,6 +38,7 @@ namespace Walterlv.Blog
                 return new PostStaticRedirector(options.StaticHost);
             });
             services.AddSingleton(sp => new PostGenerator(sp.GetService<PostStaticRedirector>()));
+            services.AddSingleton(new SiteAnalytics());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,11 +55,11 @@ namespace Walterlv.Blog
                 app.UseHsts();
             }
 
+            app.UseAnalyticsButExcluding("/img", "/css", "/js", "/_framework", "/_blazor");
             app.UseHttpsRedirection();
             app.UseExternalHttpsRedirection();
             app.UsePostLegacyUrlRedirection();
             app.UseAutoRemoveHtmlExtension();
-            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
@@ -66,6 +67,7 @@ namespace Walterlv.Blog
                 endpoints.MapFallbackToPage("/_Host");
                 endpoints.MapControllers();
             });
+            app.UseStaticFiles();
         }
     }
 }

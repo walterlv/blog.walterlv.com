@@ -3,45 +3,35 @@
 @using System.Net
 @using System.Net.Http
 @using Walterlv.Blog.Data
-@inject PostGenerator _postGenerator
+@inject PostGenerator PostGenerator
+@inject SiteAnalytics Analytics
 
 @if (postBriefList == null)
 {
-<p><em>正在下载所有博客的搜索信息...</em></p>
+    <p><em>正在下载所有博客的搜索信息...</em></p>
 }
 else
 {
-<p>搜索功能正在开发中，请先按下 <strong>Ctrl+F</strong> 然后输入你想搜索的关键词。</p>
-<div class="post-search-list">
-    <ul>
-        @foreach (var postBrief in postBriefList)
+    <p>搜索功能正在开发中，请先按下 <strong>Ctrl+F</strong> 然后输入你想搜索的关键词。</p>
+    <div class="post-search-list">
+        <ul>
+            @foreach (var postBrief in postBriefList)
             {
-        <li>
-            <a href="@($"/post/{@postBrief.Id}")">@postBrief.Title</a>
-        </li>
+                <li>
+                    <a href="@($"/post/{@postBrief.Id}")">@postBrief.Title</a>
+                </li>
             }
-    </ul>
-</div>
+        </ul>
+    </div>
 }
 
 @code {
-    [Parameter]
-    public string pageNumber { get; set; }
-
     private PostBrief[] postBriefList;
 
     protected override void OnInitialized()
     {
-        var number = 0;
-        if (pageNumber != null)
-        {
-            var value = pageNumber.StartsWith("page", StringComparison.OrdinalIgnoreCase)
-                ? pageNumber.Substring(4)
-                : "";
-            int.TryParse(value, out var result);
-            number = result - 1;
-        }
+        Analytics.Record("/search", "搜索");
 
-        postBriefList = _postGenerator.GetAll().ToArray();
+        postBriefList = PostGenerator.GetAll().ToArray();
     }
 }

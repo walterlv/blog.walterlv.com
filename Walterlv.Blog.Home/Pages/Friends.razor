@@ -1,6 +1,13 @@
 ﻿@page "/friends"
+@inject SiteAnalytics Analytics
 
 <div>
     <MarkdownPage MarkdownUrl="friends" />
 </div>
 
+@code {
+    protected override void OnInitialized()
+    {
+        Analytics.Record($"/friends");
+    }
+}

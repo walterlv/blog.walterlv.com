@@ -5,7 +5,8 @@
 @using System.Net.Http
 @using System.Globalization
 @using Walterlv.Blog.Data
-@inject PostGenerator _postGenerator
+@inject PostGenerator PostGenerator
+@inject SiteAnalytics Analytics
 
 @if (postBriefList == null)
 {
@@ -39,6 +40,8 @@ else
 
     protected override void OnInitialized()
     {
+        Analytics.Record(pageNumber == null ? "/" : $"/blog/page{pageNumber}");
+
         var number = 0;
         if (pageNumber != null)
         {
@@ -48,7 +51,7 @@ else
             int.TryParse(value, out var result);
             number = result - 1;
         }
-        
-        postBriefList = _postGenerator.GetAll().Skip(number * 30).Take(30).ToArray();
+
+        postBriefList = PostGenerator.GetAll().Skip(number * 30).Take(30).ToArray();
     }
 }
