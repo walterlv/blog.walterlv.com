@@ -34,13 +34,23 @@ else
     </div>
     <div class="post-pager">
         <ul>
-            @for (var i = 1; i <= pageCount; i++)
+            @for (var i = 0; i < pageCount; i++)
             {
-                <li>
-                    <a class="post-pager-link" href="@($"/blog/page{i}")">
-                        @i
+                var current = i;
+            <li>
+                @if (current == 0)
+                {
+                    <a class="post-pager-link" href="@($"/")" @onclick="() => ChangePage(current)">
+                        @(current + 1)
                     </a>
-                </li>
+                }
+                else
+                {
+                    <a class="post-pager-link" href="@($"/blog/page{current + 1}")" @onclick="() => ChangePage(current)">
+                        @(current + 1)
+                    </a>
+                }
+            </li>
             }
         </ul>
     </div>
@@ -68,6 +78,12 @@ else
             int.TryParse(value, out var result);
             number = result - 1;
         }
+
+        ChangePage(number);
+    }
+
+    private void ChangePage(int number)
+    {
         var posts = PostGenerator.GetAll();
         pageCount = posts.Count / 30 + 1;
         postBriefList = posts.Skip(number * 30).Take(30).ToArray();
