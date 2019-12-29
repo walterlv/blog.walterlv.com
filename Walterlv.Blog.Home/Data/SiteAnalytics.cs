@@ -19,12 +19,12 @@ namespace Walterlv.Blog.Data
             Console.WriteLine($"                    {message}");
         }
 
-        public void Route(string urlPath)
+        public void Route(string url)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write($"[{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)}] [Routed] ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(urlPath);
+            Console.WriteLine(url);
             Console.ResetColor();
         }
     }
