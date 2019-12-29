@@ -202,6 +202,14 @@ app {
         font-weight: 300;
     }
 
+.post-pager li {
+    display: inline;
+}
+
+    .post-pager li a {
+        display: inline-block;
+    }
+
 .post-content h1 {
     font-size: 2rem;
     line-height: 2.4rem;
@@ -299,21 +307,7 @@ footer {
         top: 0.5rem;
     }
 
-@media (max-width: 767.98px) {
-    .main .top-row:not(.auth) {
-        display: none;
-    }
-
-    .main .top-row.auth {
-        justify-content: space-between;
-    }
-
-    .main .top-row a, .main .top-row .btn-link {
-        margin-left: 0;
-    }
-}
-
-.post-content, section.comments, .comments-header, footer {
+.post-content, section.comments, .comments-header, footer, .post-pager {
     max-width: 60rem;
     margin: 0 auto;
 }
@@ -332,6 +326,20 @@ article.post-content > h1, article.post-content > h2, article.post-content > h3,
         margin: 0 -1rem;
         max-width: calc(100% + 2rem);
     }
+
+@media (max-width: 767.98px) {
+    .main .top-row:not(.auth) {
+        display: none;
+    }
+
+    .main .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .main .top-row a, .main .top-row .btn-link {
+        margin-left: 0;
+    }
+}
 
 @media (min-width: 768px) {
     app {
