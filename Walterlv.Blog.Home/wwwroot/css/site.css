@@ -28,6 +28,14 @@ pre {
         background: #282c34;
     }
 
+blockquote {
+    border: #888 solid;
+    border-width: 0 0 0 6px;
+    padding: 0 1.6rem 0 1rem;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
 hr {
     border-top-color: #666;
 }
@@ -361,9 +369,13 @@ article.post-content > h1, article.post-content > h2, article.post-content > h3,
         padding: unset;
     }
 
-    article.post-content > h1, article.post-content > h2, article.post-content > h3, article.post-content > h4, article.post-content > h5, article.post-content > p, article.post-content > div, div.comments-header {
+    article.post-content > h1, article.post-content > h2, article.post-content > h3, article.post-content > h4, article.post-content > h5, article.post-content > p, article.post-content > div {
         padding: inherit;
     }
+
+        div.comments-header {
+            padding: 0;
+        }
 
         article.post-content > p > img, article.post-content > p > a > img {
             max-width: 100%;
