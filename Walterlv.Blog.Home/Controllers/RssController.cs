@@ -15,16 +15,23 @@ namespace Walterlv.Blog.Controllers
     {
         private readonly PostGenerator _postGenerator;
         private readonly PostStaticRedirector _staticRedirector;
+        private readonly SiteAnalytics _analytics;
 
-        public RssController(PostGenerator postGenerator, PostStaticRedirector staticRedirector)
+        public RssController(
+            PostGenerator postGenerator,
+            PostStaticRedirector staticRedirector,
+            SiteAnalytics analytics)
         {
             _postGenerator = postGenerator;
             _staticRedirector = staticRedirector;
+            _analytics = analytics;
         }
 
         [HttpGet, ResponseCache(Duration = 60 * 5)]
         public IActionResult Get()
         {
+            _analytics.Handle("/feed.xml", "RSS 客户端正在更新订阅……");
+
             var posts = _postGenerator.GetAll(15);
             var rss = new SyndicationFeed(
                 "吕毅 (walterlv) 博客",

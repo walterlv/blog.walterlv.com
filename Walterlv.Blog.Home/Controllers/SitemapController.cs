@@ -11,15 +11,21 @@ namespace Walterlv.Blog.Controllers
     public class SitemapController : Controller
     {
         private readonly PostGenerator _postGenerator;
+        private readonly SiteAnalytics _analytics;
 
-        public SitemapController(PostGenerator postGenerator)
+        public SitemapController(
+            PostGenerator postGenerator,
+            SiteAnalytics analytics)
         {
             _postGenerator = postGenerator;
+            _analytics = analytics;
         }
 
         [HttpGet, ResponseCache(Duration = 60 * 5)]
         public ContentResult Get()
         {
+            _analytics.Handle("/sitemap.xml", "搜索引擎或爬虫正在遍历站点……");
+
             const string host = "https://blog.walterlv.com";
 
             var products = _postGenerator.GetAll();
