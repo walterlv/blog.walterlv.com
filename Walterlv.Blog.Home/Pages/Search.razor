@@ -4,7 +4,6 @@
 @using System.Net.Http
 @using Walterlv.Blog.Data
 @inject PostGenerator PostGenerator
-@inject SiteAnalytics Analytics
 
 @if (postBriefList == null)
 {
@@ -30,8 +29,6 @@ else
 
     protected override void OnInitialized()
     {
-        Analytics.Record("/search", "搜索");
-
         postBriefList = PostGenerator.GetAll().ToArray();
     }
 }

@@ -1,13 +1,5 @@
 ﻿@page "/about"
-@inject SiteAnalytics Analytics
 
 <div>
     <MarkdownPage MarkdownUrl="about" />
 </div>
-
-@code {
-    protected override void OnInitialized()
-    {
-        Analytics.Record($"/about");
-    }
-}
