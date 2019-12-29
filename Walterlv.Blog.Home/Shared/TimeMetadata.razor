@@ -1,17 +1,19 @@
 ﻿@using System.Globalization
 
-@if (PublishTime != UpdateTime)
-{
-    <time itemprop="datePublished" datetime="@PublishTime" class="date tag">
-        更新于 @UpdateTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture) • 发布于 @PublishTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture)
-    </time>
-}
-else if (PublishTime > DateTimeOffset.MinValue)
-{
-    <time itemprop="datePublished" datetime="@PublishTime" class="date tag">
-        @UpdateTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture)
-    </time>
-}
+<p class="date">
+    @if (PublishTime != UpdateTime)
+    {
+        <time itemprop="datePublished" datetime="@PublishTime">
+            更新于 @UpdateTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture) • 发布于 @PublishTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture)
+        </time>
+    }
+    else if (PublishTime > DateTimeOffset.MinValue)
+    {
+        <time itemprop="datePublished" datetime="@PublishTime">
+            @UpdateTime.ToLocalTime().ToString("yyyy年M月d日 HH:mm", CultureInfo.CurrentCulture)
+        </time>
+    }
+</p>
 
 @code {
     [Parameter]

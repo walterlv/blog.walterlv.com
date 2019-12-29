@@ -52,17 +52,11 @@ app {
     flex-direction: column;
 }
 
-.tag {
-    background-color: #424245;
-    padding: 2px 6px 2px 8px;
+.date {
     margin: 1rem 2rem 1rem 0;
     border-radius: 4px;
     color: #aaa;
     font-size: 0.75rem;
-}
-
-time.tag {
-    background-color: #424245;
 }
 
 .top-row {
@@ -207,22 +201,21 @@ time.tag {
     margin: 3rem 0 1rem;
 }
 
-    .post-content h2, h3, h4, h5 {
-        color: white;
-    }
+.post-content h2, h3, h4, h5 {
+    color: white;
+}
 
-    .post-content h2 {
-        font-size: 1.6rem;
-        margin: 2rem 0 0.5rem 0;
-    }
+.post-content h2 {
+    font-size: 1.6rem;
+    margin: 2rem 0 0.5rem 0;
+}
 
-    .post-content h3 {
-        font-size: 1.4rem;
-        margin: 1.5rem 0 0.5rem 0;
-    }
+.post-content h3 {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.5rem 0;
+}
 
     .post-content img {
-        max-width: 100%;
         display: block;
         cursor: pointer;
         transition: .3s;
@@ -322,6 +315,16 @@ footer {
     margin: 0 auto;
 }
 
+
+article.post-content > h1, article.post-content > h2, article.post-content > h3, article.post-content > h4, article.post-content > h5, article.post-content > p, article.post-content > div, div.comments-header {
+    padding: 0 1rem;
+}
+
+    article.post-content > p > img, article.post-content > p > a > img {
+        margin: 0 -1rem;
+        max-width: calc(100% + 2rem);
+    }
+
 @media (min-width: 768px) {
     app {
         flex-direction: row;
@@ -357,6 +360,15 @@ footer {
         padding-top: 1.1rem;
         padding: unset;
     }
+
+    article.post-content > h1, article.post-content > h2, article.post-content > h3, article.post-content > h4, article.post-content > h5, article.post-content > p, article.post-content > div, div.comments-header {
+        padding: inherit;
+    }
+
+        article.post-content > p > img, article.post-content > p > a > img {
+            max-width: 100%;
+            margin: inherit;
+        }
 }
 
 @media (prefers-color-scheme: dark) {
