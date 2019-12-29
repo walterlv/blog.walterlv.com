@@ -35,11 +35,13 @@ namespace Walterlv.Blog.Middlewares
         /// <returns><see cref="IApplicationBuilder"/>。</returns>
         public static IApplicationBuilder UseAutoRemoveHtmlExtension(this IApplicationBuilder app) => app.Use(async (context, next) =>
         {
-            if (context.Request.Path.HasValue
-                && context.Request.Path.Value.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
+            var urlPath = context.Request.Path.HasValue
+                ? context.Request.Path.Value
+                : "";
+            if (urlPath.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
             {
                 // 去掉 .html 后缀
-                var url = "https://" + context.Request.Host + context.Request.PathBase + context.Request.Path;
+                var url = context.Request.Host + context.Request.PathBase + urlPath[0..^5];
                 context.Response.Redirect(url);
                 context.Response.StatusCode = 301;
                 return;
