@@ -41,7 +41,7 @@ namespace Walterlv.Blog.Middlewares
             if (urlPath.EndsWith(".html", StringComparison.OrdinalIgnoreCase))
             {
                 // 去掉 .html 后缀
-                var url = context.Request.Host + context.Request.PathBase + urlPath[0..^5];
+                var url = urlPath[0..^5];
                 context.Response.Redirect(url);
                 context.Response.StatusCode = 301;
                 return;
@@ -83,7 +83,7 @@ namespace Walterlv.Blog.Middlewares
                     : "";
                 if (mapping.TryGetValue(legacyUrl, out var newUrl))
                 {
-                    var url = "//" + context.Request.Host + context.Request.PathBase + newUrl;
+                    var url = newUrl;
                     context.Response.Redirect(url);
                     context.Response.StatusCode = 301;
                     return;
