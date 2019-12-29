@@ -6,6 +6,7 @@
 @using System.Globalization
 @using Walterlv.Blog.Data
 @inject PostGenerator PostGenerator
+@inject SiteAnalytics Analytics
 
 @if (postBriefList == null)
 {
@@ -41,6 +42,10 @@ else
 
     protected override void OnInitialized()
     {
+        Analytics.Handle(
+            pageNumber != null ? $"/blog/page{pageNumber}" : "/",
+            pageNumber != null ? $"博客第 {pageNumber} 页" : "首页");
+
         var number = 0;
         if (pageNumber != null)
         {

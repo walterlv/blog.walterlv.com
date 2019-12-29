@@ -24,7 +24,7 @@ namespace Walterlv.Blog.Middlewares
                 if (pathPrefixes.Find(x => path.StartsWith(x, StringComparison.OrdinalIgnoreCase)) == null)
                 {
                     var analytics = (SiteAnalytics)context.RequestServices.GetService(typeof(SiteAnalytics));
-                    analytics.Record(context.Request.Path);
+                    analytics.Route(context.Request.Path);
                 }
                 await next().ConfigureAwait(false);
             });

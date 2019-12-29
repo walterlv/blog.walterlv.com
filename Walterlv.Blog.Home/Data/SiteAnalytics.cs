@@ -10,26 +10,22 @@ namespace Walterlv.Blog.Data
 {
     public class SiteAnalytics
     {
-        private readonly ConcurrentDictionary<string, string> _titleMarks = new ConcurrentDictionary<string, string>();
-
-        public void Mark(string urlPath, string title)
-        {
-            _titleMarks.AddOrUpdate(urlPath, title, (x, y) => title);
-        }
-
-        public void Record(string urlPath)
+        public void Handle(string urlPath, string message)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write($"[{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)}] ");
+            Console.Write($"[{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)}] [Loaded] ");
+            Console.WriteLine(urlPath);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"                    {message}");
+        }
+
+        public void Route(string urlPath)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write($"[{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)}] [Routed] ");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(urlPath);
             Console.ResetColor();
-
-            if (_titleMarks.TryGetValue(urlPath, out var title))
-            {
-                Console.ResetColor();
-                Console.WriteLine($"           {title}");
-            }
         }
     }
 }

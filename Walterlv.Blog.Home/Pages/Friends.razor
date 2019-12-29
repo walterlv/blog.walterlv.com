@@ -1,6 +1,14 @@
 ﻿@page "/friends"
+@inject SiteAnalytics Analytics
 
 <div>
     <Announcement></Announcement>
     <MarkdownPage MarkdownUrl="friends" />
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Analytics.Handle("/about", "朋友与收藏");
+    }
+}

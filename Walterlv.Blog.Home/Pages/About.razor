@@ -1,6 +1,14 @@
 ﻿@page "/about"
+@inject SiteAnalytics Analytics
 
 <div>
     <Announcement></Announcement>
     <MarkdownPage MarkdownUrl="about" />
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Analytics.Handle("/about", "关于");
+    }
+}
