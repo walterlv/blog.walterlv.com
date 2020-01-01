@@ -12,12 +12,15 @@
 <head>
     @(await Html.RenderComponentAsync<DocumentMetadataComponent>(RenderMode.ServerPrerendered))
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="walterlv" />
     <base href="~/" />
-    <link rel="stylesheet" href="@Static.Host/css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="@Static.Host/css/highlight.js/styles/atom-one-dark.css" crossorigin="anonymous">
     <link href="/css/site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="@Static.Host/css/highlight.js/styles/atom-one-dark.css">
 </head>
 <body>
     <app>

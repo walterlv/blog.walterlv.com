@@ -1,21 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
+<div class="menubar fixed-top" style="height:48px">
+    <NavMenuBar />
+</div>
+
+<div class="sidebar fixed-left" style="margin-top:48px;width:280px">
     <NavMenu />
 </div>
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="/search" target="_blank">搜索</a>
+<div class="main container" style="margin-top:48px;margin-left:280px">
+    <div class="justify-content-center">
+        <div>
+            @Body
+        </div>
+        <footer>
+            <Analytics />
+            <Copyright />
+        </footer>
     </div>
-
-    <div class="content px-4">
-        @Body
-    </div>
-
-    <footer>
-        <Analytics />
-        <Copyright />
-    </footer>
 </div>
 

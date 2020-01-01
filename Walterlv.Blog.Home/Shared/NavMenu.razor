@@ -8,26 +8,17 @@
     </defs>
 </svg>
 
-<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">walterlv</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass site-avatar">
-    <a href="https://mvp.microsoft.com/en-us/PublicProfile/5003225" Title="查看我的微软 MVP 主页">
-        <img class="avatar-logo" src="@Static.Host/img/mvp.svg" alt="Microsoft MVP">
-    </a>
-</div>
-
-<div class="site-info px-3">
-    <p class="site-info-header">吕毅</p>
-    <p>.NET and Windows Developer, Microsoft MVP</p>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
+<div @onclick="ToggleNavMenu">
+    <div class="site-avatar">
+        <a href="https://mvp.microsoft.com/en-us/PublicProfile/5003225" Title="查看我的微软 MVP 主页">
+            <img class="avatar-logo" src="@Static.Host/img/mvp.svg" alt="Microsoft MVP">
+        </a>
+    </div>
+    <div class="site-info px-3">
+        <p class="site-info-header">吕毅</p>
+        <p>.NET and Windows Developer, Microsoft MVP</p>
+    </div>
+    <ul class="nav nav-pills flex-column">
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> 博客
@@ -39,20 +30,20 @@
             </NavLink>
         </li>
         @*<li class="nav-item px-3">
-            <NavLink class="nav-link" href="mind">
-                <span class="oi oi-globe" aria-hidden="true"></span> 胡思乱想
-            </NavLink>
-        </li>*@
+                <NavLink class="nav-link" href="mind">
+                    <span class="oi oi-globe" aria-hidden="true"></span> 胡思乱想
+                </NavLink>
+            </li>*@
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="friends">
                 <span class="oi oi-people" aria-hidden="true"></span> 朋友
             </NavLink>
         </li>
         @*<li class="nav-item px-3">
-            <NavLink class="nav-link" href="github">
-                <span class="oi oi-tag" aria-hidden="true"></span> 开源项目
-            </NavLink>
-        </li>*@
+                <NavLink class="nav-link" href="github">
+                    <span class="oi oi-tag" aria-hidden="true"></span> 开源项目
+                </NavLink>
+            </li>*@
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="about">
                 <span class="oi oi-person" aria-hidden="true"></span> 关于
@@ -66,7 +57,7 @@
     </ul>
 </div>
 
-<div class="@NavMenuCssClass site-info px-3">
+<div class="site-info px-3">
     <p>
         <a itemprop="twitter" href="https://twitter.com/_lvyi_" title="Twitter">
             <svg><use xlink:href="#icon-twitter"></use></svg>

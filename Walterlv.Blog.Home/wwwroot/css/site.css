@@ -10,7 +10,12 @@ a, .btn-link {
     color: #22A6F2;
 }
 
-.btn-primary {
+.bg-theme {
+    background-color: #1570A6;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25), 0 -1px 0 rgba(0,0,0,.1) inset;
+}
+
+/*.btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
@@ -94,6 +99,7 @@ app {
 
 .sidebar {
     background: #323232;
+    flex-shrink: 0;
 }
 
     .sidebar .top-row {
@@ -368,7 +374,6 @@ article.post-content > h1, article.post-content > h2, article.post-content > h3,
     }
 
     .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
 
@@ -393,4 +398,4 @@ article.post-content > h1, article.post-content > h2, article.post-content > h3,
 
 @media (prefers-color-scheme: dark) {
 
-}
+}*/
